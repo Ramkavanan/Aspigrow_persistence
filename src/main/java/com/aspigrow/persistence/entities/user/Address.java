@@ -55,17 +55,7 @@ public class Address  extends BaseObject implements GenericEntity<Integer> {
     @Column(name="pincode", nullable=false)
     private Integer pincode;
     
-    @OneToOne(mappedBy = "shippingAddress")
-    private User user;
-
-    public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
+  
 	public Integer getId() {
         return id;
     }

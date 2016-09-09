@@ -44,7 +44,7 @@ public class PersistenceConfiguration {
 
     private String getServername() {
         return DynamicPropertyFactory.getInstance()
-                .getStringProperty(DATASOURCE_SERVER_NAME, "localhost").getValue();
+                .getStringProperty(DATASOURCE_SERVER_NAME, "127.0.0.1").getValue();
     }
 
     private int getPortNumber() {
@@ -94,7 +94,7 @@ public class PersistenceConfiguration {
     public DataSource dataSource() {
         Properties props = new Properties();
         props.setProperty("dataSourceClassName", getClassName());
-	props.setProperty("dataSource.url", "jdbc:mysql://localhost:3306/"+getDatabaseName());
+	props.setProperty("dataSource.url", "jdbc:mysql://127.0.0.1:3306/"+getDatabaseName());
         props.setProperty("dataSource.user", getUsername());
         props.setProperty("dataSource.password", getPassword());
         props.setProperty("dataSource.databaseName", getDatabaseName());
