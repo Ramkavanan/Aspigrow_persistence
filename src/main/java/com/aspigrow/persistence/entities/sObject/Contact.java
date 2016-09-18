@@ -2,11 +2,14 @@ package com.aspigrow.persistence.entities.sObject;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -51,7 +54,30 @@ public class Contact  extends BaseObject implements GenericEntity<Integer> {
     
     @Column(name="Phone")
     private String Phone;
-  
+
+    @Column(name="salesforceId")
+    private String salesforceId;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "account", referencedColumnName = "id", insertable = true, updatable = true)
+	private Account account;
+	
+	public String getSalesforceId() {
+		return salesforceId;
+	}
+
+	public void setSalesforceId(String salesforceId) {
+		this.salesforceId = salesforceId;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}

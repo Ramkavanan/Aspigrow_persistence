@@ -65,7 +65,7 @@ public class PersistenceConfiguration {
     }
 
     private String getPassword() {
-        return DynamicPropertyFactory.getInstance().getStringProperty(DATASOURCE_PASSWORD, "Praveen@2016").getValue();
+        return DynamicPropertyFactory.getInstance().getStringProperty(DATASOURCE_PASSWORD, "root").getValue();
     }
 
     private String getDialect() {

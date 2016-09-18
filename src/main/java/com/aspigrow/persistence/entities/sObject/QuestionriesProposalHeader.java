@@ -1,12 +1,17 @@
 package com.aspigrow.persistence.entities.sObject;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -45,7 +50,63 @@ public class QuestionriesProposalHeader  extends BaseObject implements GenericEn
     
     @Column(name="status")
     private String status;
+
+    @Column(name="quesName")
+    private String quesName;
     
+    @Column(name="contact")
+    private String contact;
+    
+    @Column(name="salesforceId")
+    private String salesforceId;
+
+    @OneToOne(mappedBy = "quesProcessHeader")
+    private Opportunity opportunity;
+
+    @OneToMany(mappedBy="quesProcessHeader",cascade = CascadeType.ALL)
+    private Set<QuestionriesProposalLineItem>  quesProcessLineItems = new HashSet<QuestionriesProposalLineItem>();
+    
+	public String getQuesName() {
+		return quesName;
+	}
+
+	public void setQuesName(String quesName) {
+		this.quesName = quesName;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
+	public String getSalesforceId() {
+		return salesforceId;
+	}
+
+	public void setSalesforceId(String salesforceId) {
+		this.salesforceId = salesforceId;
+	}
+
+	public Opportunity getOpportunity() {
+		return opportunity;
+	}
+
+	public void setOpportunity(Opportunity opportunity) {
+		this.opportunity = opportunity;
+	}
+
+	public Set<QuestionriesProposalLineItem> getQuesProcessLineItems() {
+		return quesProcessLineItems;
+	}
+
+	public void setQuesProcessLineItems(
+			Set<QuestionriesProposalLineItem> quesProcessLineItems) {
+		this.quesProcessLineItems = quesProcessLineItems;
+	}
+
 	public String getName() {
 		return name;
 	}

@@ -2,11 +2,14 @@ package com.aspigrow.persistence.entities.sObject;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,7 +45,45 @@ public class Opportunity  extends BaseObject implements GenericEntity<Integer> {
 
     @Column(name="name")
     private String name;
+
+    @Column(name="quesId")
+    private String quesId;
+
+    @Column(name="oppId")
+    private String oppId;
+
+    @OneToOne(mappedBy = "opportunity")
+    private Account account;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "quesProcessHeader", referencedColumnName = "id", insertable = true, updatable = true)
+    private QuestionriesProposalHeader quesProcessHeader;
   
+    
+	public String getQuesId() {
+		return quesId;
+	}
+
+	public void setQuesId(String quesId) {
+		this.quesId = quesId;
+	}
+
+	public String getOppId() {
+		return oppId;
+	}
+
+	public void setOppId(String oppId) {
+		this.oppId = oppId;
+	}
+
+	public QuestionriesProposalHeader getQuesProcessHeader() {
+		return quesProcessHeader;
+	}
+
+	public void setQuesProcessHeader(QuestionriesProposalHeader quesProcessHeader) {
+		this.quesProcessHeader = quesProcessHeader;
+	}
+
 	public String getName() {
 		return name;
 	}

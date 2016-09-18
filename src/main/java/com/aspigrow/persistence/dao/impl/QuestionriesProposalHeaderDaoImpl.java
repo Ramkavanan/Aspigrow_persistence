@@ -39,6 +39,7 @@ public class QuestionriesProposalHeaderDaoImpl extends GenericDaoImpl<Questionri
             quesProplHeader.setDeleted(false);
             quesProplHeader.setCreatedAt(new Date());
             quesProplHeader.setModifiedAt(new Date());
+            System.out.println("Came Here At ------   "+quesProplHeader.getCreatedAt());
             return this.saveQuestionriesProposalHeader(quesProplHeader);
         } catch(Exception ex) {
             ex.printStackTrace();

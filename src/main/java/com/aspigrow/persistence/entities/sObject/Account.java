@@ -1,12 +1,18 @@
 package com.aspigrow.persistence.entities.sObject;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -44,10 +50,44 @@ public class Account  extends BaseObject implements GenericEntity<Integer> {
     
     @Column(name="accountNumber")
     private String acctNumber;
+	
+    @Column(name="salesforceId", unique = true)
+    private String salesforceId;
     
     @Column(name="site")
     private String site;
+
+    @OneToMany(mappedBy="account",cascade = CascadeType.ALL)
+    private Set<Contact>  contacts = new HashSet<Contact>();
     
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "opportunity", referencedColumnName = "id", insertable = true, updatable = true)
+    private Opportunity opportunity;
+    
+	public String getSalesforceId() {
+		return salesforceId;
+	}
+
+	public void setSalesforceId(String salesforceId) {
+		this.salesforceId = salesforceId;
+	}
+
+	public Set<Contact> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(Set<Contact> contacts) {
+		this.contacts = contacts;
+	}
+
+	public Opportunity getOpportunity() {
+		return opportunity;
+	}
+
+	public void setOpportunity(Opportunity opportunity) {
+		this.opportunity = opportunity;
+	}
+
 	public String getName() {
 		return name;
 	}

@@ -2,11 +2,15 @@ package com.aspigrow.persistence.entities.sObject;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -60,6 +64,13 @@ public class QuestionriesProposalLineItem  extends BaseObject implements Generic
     
     @Column(name="type")
     private String type;
+    
+    @Column(name="questItemId")
+    private String questItemId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "quesProcessHeader", referencedColumnName = "id", insertable = true, updatable = true)
+    private QuestionriesProposalHeader quesProcessHeader;
     
 	public String getName() {
 		return name;
