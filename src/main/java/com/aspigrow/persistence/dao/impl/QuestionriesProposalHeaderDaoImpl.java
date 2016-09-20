@@ -1,12 +1,14 @@
 package com.aspigrow.persistence.dao.impl;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aspigrow.persistence.dao.QuestionriesProposalHeaderDao;
@@ -100,11 +102,27 @@ public class QuestionriesProposalHeaderDaoImpl extends GenericDaoImpl<Questionri
                 .uniqueResult();
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	public List<QuestionriesProposalHeader> getQuestionriesProposalHeaderByContactId(String contactId) throws Exception {
+		if( contactId == null)
+			return null;
+		return (List<QuestionriesProposalHeader>) getSession().createCriteria(QuestionriesProposalHeader.class)
+                .add(getQuesProcessHeaderContactExample(contactId)).list();
+	}
 
 	private static Example getQuestionriesProposalHeaderExample(String externalId) {
 		QuestionriesProposalHeader quesProplHeader = new QuestionriesProposalHeader();
         quesProplHeader.setDeleted(false);
 		quesProplHeader.setExternalId(externalId);
-        	return Example.create(quesProplHeader);
-    	}
+        return Example.create(quesProplHeader);
+    }
+	
+	private static Example getQuesProcessHeaderContactExample(String contactId) {
+		QuestionriesProposalHeader quesProplHeader = new QuestionriesProposalHeader();
+        quesProplHeader.setDeleted(false);
+		quesProplHeader.setContact(contactId);
+        return Example.create(quesProplHeader);
+    }
 }

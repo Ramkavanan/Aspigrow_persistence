@@ -37,9 +37,12 @@ public class UserDaoImpl extends GenericDaoImpl<User, Long> implements UserDao {
     @Override
     public User save(User user)  {
         try{
+        	System.out.println("Came Dao implementation layer ==== ");
             if (user == null) {
+            	System.out.println("Came null pointer value === ");
                 return null;
             }
+            System.out.println("Came not null part === ");
             user.setArchived(false);
             user.setDeleted(false);
             user.setCreatedAt(new Date());

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -68,10 +69,26 @@ public class QuestionriesProposalLineItem  extends BaseObject implements Generic
     @Column(name="questItemId")
     private String questItemId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "quesProcessHeader", referencedColumnName = "id", insertable = true, updatable = true)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "quesProcessHeader", referencedColumnName = "id", insertable = true, updatable = true, nullable=false)
     private QuestionriesProposalHeader quesProcessHeader;
     
+	public String getQuestItemId() {
+		return questItemId;
+	}
+
+	public void setQuestItemId(String questItemId) {
+		this.questItemId = questItemId;
+	}
+
+	public QuestionriesProposalHeader getQuesProcessHeader() {
+		return quesProcessHeader;
+	}
+
+	public void setQuesProcessHeader(QuestionriesProposalHeader quesProcessHeader) {
+		this.quesProcessHeader = quesProcessHeader;
+	}
+
 	public String getName() {
 		return name;
 	}

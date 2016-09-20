@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,10 +53,10 @@ public class Opportunity  extends BaseObject implements GenericEntity<Integer> {
     @Column(name="oppId")
     private String oppId;
 
-    @OneToOne(mappedBy = "opportunity")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "opportunity")
     private Account account;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "quesProcessHeader", referencedColumnName = "id", insertable = true, updatable = true)
     private QuestionriesProposalHeader quesProcessHeader;
   

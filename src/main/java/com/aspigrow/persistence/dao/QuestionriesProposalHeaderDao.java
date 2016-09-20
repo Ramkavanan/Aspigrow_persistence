@@ -1,5 +1,7 @@
 package com.aspigrow.persistence.dao;
 
+import java.util.List;
+
 import com.aspigrow.persistence.entities.sObject.QuestionriesProposalHeader;
 
 public interface QuestionriesProposalHeaderDao extends GenericDao<QuestionriesProposalHeader, Long> {
@@ -34,4 +36,6 @@ public interface QuestionriesProposalHeaderDao extends GenericDao<QuestionriesPr
 	QuestionriesProposalHeader updateQuestionriesProposalHeader(QuestionriesProposalHeader qpheader) throws Exception;
 	
 	QuestionriesProposalHeader getQuestionriesProposalHeader(String externalId) throws Exception;
+	
+	List<QuestionriesProposalHeader> getQuestionriesProposalHeaderByContactId(String contactId) throws Exception;
 }

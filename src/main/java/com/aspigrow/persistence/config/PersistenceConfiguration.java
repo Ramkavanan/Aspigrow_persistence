@@ -74,7 +74,7 @@ public class PersistenceConfiguration {
     }
 
     private Boolean getShowSql() {
-        return DynamicPropertyFactory.getInstance().getBooleanProperty(SHOW_SQL, false).getValue();
+        return DynamicPropertyFactory.getInstance().getBooleanProperty(SHOW_SQL, true).getValue();
     }
 
     private Boolean getFormatSql() {

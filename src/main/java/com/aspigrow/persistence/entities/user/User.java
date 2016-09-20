@@ -2,11 +2,14 @@ package com.aspigrow.persistence.entities.user;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,6 +23,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.aspigrow.persistence.entities.BaseObject;
 import com.aspigrow.persistence.entities.GenericEntity;
+import com.aspigrow.persistence.entities.sObject.Contact;
 
 @Entity
 @Table(name="user")
@@ -93,11 +97,23 @@ public class User extends BaseObject implements GenericEntity<Integer> {
     @Column(name="emailCode")
     private String emailCode;
     
-    public User() { }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact", referencedColumnName = "id", insertable = true, updatable = true)
+    private Contact contact;
+    
+    public Contact getContact() {
+		return contact;
+	}
+
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
+
+	public User() { }
 
 	public User(String phone, String email) {
         this.phone = phone;
-        this.userName = phone;
+        this.userName = email;
         this.password = phone;
         this.email = email;
     }

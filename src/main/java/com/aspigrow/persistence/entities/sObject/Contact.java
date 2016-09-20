@@ -5,17 +5,20 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.aspigrow.persistence.entities.BaseObject;
 import com.aspigrow.persistence.entities.GenericEntity;
+import com.aspigrow.persistence.entities.user.User;
 
 @Entity
 @Table(name="contact")
@@ -57,8 +60,11 @@ public class Contact  extends BaseObject implements GenericEntity<Integer> {
 
     @Column(name="salesforceId")
     private String salesforceId;
+    
+    @OneToOne(mappedBy = "contact")
+    private User user;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "account", referencedColumnName = "id", insertable = true, updatable = true)
 	private Account account;
 	
