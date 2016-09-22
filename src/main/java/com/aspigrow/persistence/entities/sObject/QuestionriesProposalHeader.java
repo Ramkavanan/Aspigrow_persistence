@@ -64,7 +64,7 @@ public class QuestionriesProposalHeader  extends BaseObject implements GenericEn
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "quesProcessHeader")
     private Opportunity opportunity;
 
-    @OneToMany( mappedBy="quesProcessHeader",cascade = CascadeType.ALL)
+    @OneToMany( fetch = FetchType.EAGER, mappedBy="quesProcessHeader",cascade = CascadeType.ALL)
     private Set<QuestionriesProposalLineItem>  quesProcessLineItems = new HashSet<QuestionriesProposalLineItem>();
     
 	public String getQuesName() {
