@@ -122,6 +122,7 @@ public class QuestionriesProposalHeaderDaoImpl extends GenericDaoImpl<Questionri
 	private static Example getQuesProcessHeaderContactExample(String contactId) {
 		QuestionriesProposalHeader quesProplHeader = new QuestionriesProposalHeader();
         quesProplHeader.setDeleted(false);
+        quesProplHeader.setStatus("Not Submitted");
 		quesProplHeader.setContact(contactId);
         return Example.create(quesProplHeader);
     }

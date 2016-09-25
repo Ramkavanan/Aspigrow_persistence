@@ -70,7 +70,7 @@ public class QuestionriesProposalLineItem  extends BaseObject implements Generic
     private String questItemId;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "quesProcessHeader", referencedColumnName = "id", insertable = true, updatable = true, nullable=false)
+	@JoinColumn(name = "quesProcessHeader", referencedColumnName = "id", nullable=false)
     private QuestionriesProposalHeader quesProcessHeader;
     
 	public String getQuestItemId() {
